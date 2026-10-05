@@ -1,0 +1,33 @@
+table Dim_Date
+	lineageTag: 33b18aad-094b-492b-be36-44937eedc07a
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d6f26bb5-84b7-446a-ba5f-86621a2e1d60
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: e80c6931-b3e8-42d8-9c59-651a4127c7cf
+			defaultHierarchy: LocalDateTable_d7ff716a-267d-4178-b0cb-e22f3032f11a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Dim_Date = m
+		mode: import
+		source =
+				let
+				    Source = Fact_Sales,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"date"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
