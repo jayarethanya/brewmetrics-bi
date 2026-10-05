@@ -1,0 +1,9 @@
+# Reflection
+
+This project helped me understand how Business Intelligence development can be combined with version control. I used Power BI to transform the BrewMetrics sales data into a star schema containing Fact_Sales, Dim_Date, Dim_City, and Dim_Product. I then created DAX measures and developed a dashboard to analyze city performance, monthly sales trends, product categories, and the seasonal pattern of Cold Brew.
+
+GitHub and GitHub Desktop helped me maintain the project in separate development steps instead of keeping only one final version. This makes it easier to track changes and understand how the dashboard developed over time.
+
+Copilot was useful for suggesting DAX approaches and explaining possible calculations. However, I learned that suggestions need to be checked against the actual data model. One important correction was required for Total Sales because the final Fact_Sales table did not contain a sales_amount column. Instead, I calculated Total Sales using quantity multiplied by unit_price. This showed me that AI-generated suggestions should always be tested before being used.
+
+Overall, the version-controlled workflow made the BI project more organized, traceable, and easier to update. It also helped me understand the importance of validating AI-generated code rather than accepting it without checking.
