@@ -8,6 +8,20 @@ table Fact_Sales
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'MoM Growth %' =
+			
+			VAR CurrentSales = [Total Sales]
+			VAR PreviousSales =
+			    CALCULATE(
+			        [Total Sales],
+			        DATEADD(Dim_Date[date], -1, MONTH)
+			    )
+			RETURN
+			    DIVIDE(CurrentSales - PreviousSales, PreviousSales)
+		lineageTag: 28e3b8b4-46dd-4e2e-b4b9-a0ec13ce63e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column sale_id
 		dataType: int64
 		formatString: 0
