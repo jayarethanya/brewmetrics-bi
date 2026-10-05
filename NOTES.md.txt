@@ -1,0 +1,50 @@
+# Copilot Notes
+
+## DAX Measure Suggestions and Corrections
+
+### 1. Total Sales
+Copilot suggested calculating total sales using the sales amount field.
+
+Correction:
+The Fact_Sales table did not contain a sales_amount column in the final model. Therefore, Total Sales was calculated using quantity multiplied by unit price.
+
+Final measure:
+Total Sales =
+SUMX(
+    Fact_Sales,
+    Fact_Sales[quantity] * Fact_Sales[unit_price]
+)
+
+### 2. MoM Growth %
+Copilot suggested comparing the current month's sales with the previous month's sales using DATEADD.
+
+Final measure:
+MoM Growth % =
+VAR CurrentSales = [Total Sales]
+VAR PreviousSales =
+    CALCULATE(
+        [Total Sales],
+        DATEADD(Dim_Date[date], -1, MONTH)
+    )
+RETURN
+    DIVIDE(
+        CurrentSales - PreviousSales,
+        PreviousSales
+    )
+
+### 3. Running Total Sales
+Copilot suggested using CALCULATE with FILTER and ALL to calculate cumulative sales.
+
+### 4. City Sales Rank
+Copilot suggested using RANKX to rank cities based on Total Sales.
+
+### 5. Cold Brew Sales
+Copilot suggested filtering the Total Sales measure for the Cold Brew product.
+
+## Real Correction Made
+
+The original calculation expected a sales_amount column. Since the final Fact_Sales table did not contain this column, the measure was corrected to calculate sales as:
+
+Quantity × Unit Price
+
+This correction was tested in Power BI and produced the required Total Sales value.
