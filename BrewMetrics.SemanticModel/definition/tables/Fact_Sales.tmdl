@@ -1,6 +1,13 @@
 table Fact_Sales
 	lineageTag: 78fafdf6-cdcf-4eb0-9b9e-41cd3fdaf9b9
 
+	measure 'Total Sales' =
+			
+			SUM(Fact_Sales[sales_amount])
+		lineageTag: ea75890f-ec20-43ab-839e-e48eafe71648
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column sale_id
 		dataType: int64
 		formatString: 0
@@ -71,16 +78,25 @@ table Fact_Sales
 
 		annotation SummarizationSetBy = Automatic
 
+	column sales_amount
+		dataType: double
+		lineageTag: 686bf16a-a188-4de2-b5e4-499e166201d0
+		summarizeBy: sum
+		sourceColumn: sales_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition Fact_Sales = m
 		mode: import
 		source =
 				let
 				    Source = Csv.Document(File.Contents("C:\Users\DELL\Documents\GitHub\brewmetrics-bi\brewmetrics_sales.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sale_id", Int64.Type}, {"date", type date}, {"city", type text}, {"store_format", type text}, {"category", type text}, {"item", type text}, {"quantity", Int64.Type}, {"unit_price", Int64.Type}, {"sales_amount", type number}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"sales_amount"})
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sale_id", Int64.Type}, {"date", type date}, {"city", type text}, {"store_format", type text}, {"category", type text}, {"item", type text}, {"quantity", Int64.Type}, {"unit_price", Int64.Type}, {"sales_amount", type number}})
 				in
-				    #"Removed Columns"
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 
