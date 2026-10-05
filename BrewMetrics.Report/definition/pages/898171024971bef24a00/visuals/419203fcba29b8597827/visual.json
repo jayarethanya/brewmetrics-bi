@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "419203fcba29b8597827",
+  "position": {
+    "x": 99.213361323213917,
+    "y": 99.213361323213917,
+    "z": 4001,
+    "height": 113.38669865510161,
+    "width": 1760.3284966204526,
+    "tabOrder": 4001
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "2BrewMetrics Coffee Co. – Sales Performance Dashboar",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "44pt"
+                    }
+                  },
+                  {
+                    "value": "d",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
